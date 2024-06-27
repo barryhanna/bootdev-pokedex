@@ -27,6 +27,16 @@ exit: Exit the Pokedex`)
 	return nil
 }
 
+func commandMap() error {
+	fmt.Println("Command: map")
+	return nil
+}
+
+func commandMapB() error {
+	fmt.Println("Command: mapb")
+	return nil
+}
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := map[string]cliCommand{
@@ -39,6 +49,16 @@ func main() {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
+		},
+		"map": {
+			name:        "map",
+			description: "Get Pokemon locations",
+			callback:    commandMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Get previous Pokemon locations",
+			callback:    commandMapB,
 		},
 	}
 
