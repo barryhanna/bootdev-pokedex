@@ -3,6 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
+	"log"
+	"net/http"
 	"os"
 )
 
@@ -29,6 +32,21 @@ exit: Exit the Pokedex`)
 
 func commandMap() error {
 	fmt.Println("Command: map")
+	apiLocationEndpoint := "https://pokeapi.co/api/v2/location"
+	res, err := http.Get(apiLocationEndpoint)
+
+	if err != nil {
+		return err
+	}
+	body, err := io.ReadAll(res.Body)
+	res.Body.Close()
+	if res.StatusCode > 299 {
+		log.Fatalf("Response failed with statuscode: %d and\nbody: %s\n", res.StatusCode, body)
+	}
+	if err != nil {
+		return err
+	}
+	fmt.Print(body)
 	return nil
 }
 
