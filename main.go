@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"log"
@@ -46,7 +47,7 @@ func commandMap() error {
 	if err != nil {
 		return err
 	}
-	fmt.Print(body)
+	fmt.Println(bytes.NewBuffer(body).String())
 	return nil
 }
 
