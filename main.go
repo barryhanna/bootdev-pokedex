@@ -2,13 +2,23 @@ package main
 
 import (
 	"bufio"
-	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
 )
+
+type config struct {
+	Count    int    `json:"count"`
+	Next     string `json:"next"`
+	Previous any    `json:"previous"`
+	Results  []struct {
+		Name string `json:"name"`
+		URL  string `json:"url"`
+	} `json:"results"`
+}
 
 type cliCommand struct {
 	name        string
@@ -47,7 +57,11 @@ func commandMap() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(bytes.NewBuffer(body).String())
+	err = json.Unmarshal(body, c)
+	if err != nil {
+		fmt.Println("error: could not unmarshal JSON result")
+	}
+	fmt.Println(c)
 	return nil
 }
 
