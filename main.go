@@ -57,7 +57,8 @@ func commandMap() error {
 	if err != nil {
 		return err
 	}
-	err = json.Unmarshal(body, c)
+	var c config
+	err = json.Unmarshal(body, &c)
 	if err != nil {
 		fmt.Println("error: could not unmarshal JSON result")
 	}
