@@ -62,7 +62,10 @@ func commandMap() error {
 	if err != nil {
 		fmt.Println("error: could not unmarshal JSON result")
 	}
-	fmt.Println(c)
+	fmt.Println(c.Results)
+	for _, item := range c.Results {
+		fmt.Println(item.Name)
+	}
 	return nil
 }
 
