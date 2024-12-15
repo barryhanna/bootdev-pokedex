@@ -62,7 +62,6 @@ func commandMap() error {
 	if err != nil {
 		fmt.Println("error: could not unmarshal JSON result")
 	}
-	fmt.Println(c.Results)
 	for _, item := range c.Results {
 		fmt.Println(item.Name)
 	}
@@ -104,7 +103,7 @@ func main() {
 		for scanner.Scan() {
 			command := scanner.Text()
 			commands[command].callback()
-			fmt.Print("pokedex >")
+			fmt.Print("Pokedex >")
 		}
 	}
 }
